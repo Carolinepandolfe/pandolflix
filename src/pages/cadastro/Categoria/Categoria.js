@@ -1,20 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault/PageDefault';
 
+function CadastroCategoria() {
+    const [categorias, setCategorias] = useState(['Oi']);
+    const [nomeDaCategoria,setNomeDaCategoria] = useState('Filmes');
+    
 
-function CadastroCategoria () {
-    return (
-        <PageDefault>
-            <h1>Cadastro de Categoria</h1>
+  return (
+    <PageDefault>
+      <h1>Cadastro de Categoria: {nomeDaCategoria}</h1>
 
-            <Link to='/'>
-                Ir para home
-            </Link>    
+      <form onSubmit={function handleSubmit(inputValue){
+          inputValue.preventDefault();
+          setCategorias([
+              ...categorias,
+              nomeDaCategoria
+          ]);  
+      }}>
 
-        </PageDefault>
-    )
-} 
+        <label>
+          Nome da Categoria:
+          <input
+            type="text"
+            value={nomeDaCategoria}
 
+            onChange={function inputCategoria(inputValue){
+                setNomeDaCategoria(inputValue.target.value)
+            }}
+          />
+        </label>
+
+        <button>
+          Cadastrar
+        </button>
+      </form>
+
+      <ul>
+          {categorias.map((categoria, index) => {
+              return (
+                  <li key={`${categoria} ${index}`}>
+                      {categoria}
+                  </li>
+              )
+          })}
+      </ul>
+
+
+      <Link to="/">
+        Ir para home
+      </Link>
+    </PageDefault>
+  )
+}
 
 export default CadastroCategoria;
