@@ -7,7 +7,7 @@ import Footer from '../../components/Footer';
 
 function App() {
   return (
-    <React.Fragment style={{ background: "#141414" }}>
+    < div style={{ background: "#141414" }}>
       <Menu />
 
       <BannerMain
@@ -42,7 +42,7 @@ function App() {
       />
 
       <Footer />
-    </React.Fragment>
+    </div>
   );
 }
 
