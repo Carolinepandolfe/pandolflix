@@ -6,7 +6,7 @@ import Button from '../../../components/Button/Button';
 
 function CadastroCategoria() {
   const valoresIniciais = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '',
   };
@@ -31,7 +31,7 @@ function CadastroCategoria() {
 
   useEffect(() => {
     const URL = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8080/categorias'
+      ? 'http://localhost:8080'
       : 'https://pandolflix.herokuapp.com/categorias';
     fetch(URL)
       .then(async (res) => {
@@ -72,7 +72,7 @@ function CadastroCategoria() {
     <PageDefault>
       <h1>
         Cadastro de Categoria:
-        {valuesForm.nome}
+        {valuesForm.titulo}
       </h1>
 
       <form onSubmit={function handleSubmit(inputValue) {
@@ -89,7 +89,7 @@ function CadastroCategoria() {
           label="Nome da Categoria: "
           type="text"
           name="nome"
-          value={valuesForm.nome}
+          value={valuesForm.titulo}
           onChange={handleChange}
         />
 
@@ -123,7 +123,7 @@ function CadastroCategoria() {
       <ul>
         {categorias.map((categoria) => (
           <li key={`${categoria.nome}`}>
-            {categoria.nome}
+            {categoria.titulo}
           </li>
         ))}
       </ul>
