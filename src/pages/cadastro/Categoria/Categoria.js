@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault/PageDefault';
 import FormField from '../../../components/FormField/FormField';
+import Button from '../../../components/Button/Button';
 
 function CadastroCategoria() {
   const valoresIniciais = {
@@ -27,6 +28,43 @@ function CadastroCategoria() {
       inputValue.target.value,
     );
   }
+
+  useEffect(() => {
+    const URL = 'http://localhost:8080/categorias';
+    fetch(URL)
+      .then(async (res) => {
+        const response = await res.json();
+        setCategorias([
+          ...response,
+        ]);
+      });
+
+    // setTimeout(() => {
+    //   setCategorias([
+    //     ...categorias,
+    //     {
+    //       id: 1,
+    //       nome: 'Front End',
+    //       cor: '#6BD1FF',
+    //       link_extra: {
+    //         text: 'Formação de Front End na Alura',
+    //         url: 'https://www.alura.com.br/cursos-online-front-end',
+    //       },
+    //     },
+
+    //     {
+    //       id: 2,
+    //       nome: 'Back',
+    //       cor: '#6BD1FF',
+    //       link_extra: {
+    //         text: 'Formação de Front End na Alura',
+    //         url: 'https://www.alura.com.br/cursos-online-front-end',
+    //       },
+    //     },
+
+    //   ]);
+    // }, 4000);
+  }, []);
 
   return (
     <PageDefault>
@@ -69,10 +107,16 @@ function CadastroCategoria() {
           onChange={handleChange}
         />
 
-        <button>
+        <Button>
           Cadastrar
-        </button>
+        </Button>
       </form>
+
+      {categorias.length === 0 && (
+        <div>
+          Loading...
+        </div>
+      )}
 
       <ul>
         {categorias.map((categoria) => (
